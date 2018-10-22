@@ -1,0 +1,57 @@
+{% load bootstrap4 %}
+
+{% block title %}Upload file form{% endblock %}
+{% block extrastyle %}
+<!-- Select2 -->
+{% endblock %}
+{% block content_title %}
+<section class="content-header">
+    <h1 style="font-variant:small-caps">
+        New Upload file
+    </h1>
+</section>
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-xs-12 col-md-7 left">
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Upload file form</h3>
+        </div>
+        <!-- /.box-header -->
+        <form action="{% url 'webapp:upload_form' %}" role="form" method="POST" class="form" enctype="multipart/form-data">
+          <div class="box-body">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons %}
+                <a class="btn btn-default go_back" href="#" onclick="history.go(-1)">
+                    <i class="fa fa-history"></i> Go back
+                </a>
+                <button type="submit" class="btn btn-primary" onclick="history.go(-1)">
+                  <i class="fa fa-save"></i> Save
+                </button>
+              {% endbuttons %}
+          </div>
+        </form>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+      <!-- /.box -->
+  </div>
+</div>
+{% endblock %}
+
+{% block extrajs %}
+<!-- bootstrap datepicker -->
+<!-- page script -->
+<script>
+  window.onresize = function(event) {
+    var $iW = $(window).innerWidth();
+    if ($iW < 976){
+       $('.right').insertBefore('.left');
+    }else{
+       $('.right').insertAfter('.left');
+    }
+  }
+</script>
+{% endblock %}
