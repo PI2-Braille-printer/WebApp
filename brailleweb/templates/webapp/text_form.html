@@ -1,21 +1,18 @@
 {% extends 'adminlte/base.html' %}
 {% load bootstrap3 %}
-{% block title %}
-<section class="content-header">
-    <h1 style="font-variant:small-caps">
-        New Upload file
-    </h1>
-</section>
+
+{% block title %}Text Form{% endblock %}
+{% block extrastyle %}
 {% endblock %}
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-7 left">
     <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Upload file form</h3>
+          <h3 class="box-title">Insert a text</h3>
         </div>
         <!-- /.box-header -->
-        <form action="{% url 'webapp:upload_file_form' %}" role="form" method="POST" class="form" enctype="multipart/form-data">
+        <form action="{% url 'webapp:text_form' %}" role="form" method="POST" class="form">
           <div class="box-body">
               {% csrf_token %}
               {% bootstrap_form form %}

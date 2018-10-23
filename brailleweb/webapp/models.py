@@ -11,8 +11,7 @@ def default_upload_path(instance, filename):
     return 'public/{0}/'.format(filename)
 
 class UploadFile(models.Model):
-    title = models.CharField(("Title"), max_length=255)
-    file = models.FileField(("Upload File"), upload_to=default_upload_path, storage=sendfile_storage)
+    file = models.FileField(("Upload File"), upload_to=default_upload_path)
     
     def save(self, *args, **kwargs):
         # Override file if existing
@@ -20,3 +19,6 @@ class UploadFile(models.Model):
             self.file.delete()
             self.delete()
         super(UploadFile, self).save(*args, **kwargs)
+
+class Text(models.Model):
+    content = models.TextField()
