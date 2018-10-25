@@ -6,10 +6,10 @@ class UploadFileForm(forms.ModelForm):
     
     class Meta:
         model = UploadFile
-        exclude = []
+        exclude = ['active']
 
 class DefaultForm(forms.ModelForm):
     
     class Meta:
         model = Text
-        exclude = []
+        exclude = ['active']

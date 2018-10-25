@@ -12,6 +12,7 @@ def default_upload_path(instance, filename):
 
 class UploadFile(models.Model):
     file = models.FileField(("Upload File"), upload_to=default_upload_path)
+    active = models.BooleanField(default=True)
     
     def save(self, *args, **kwargs):
         # Override file if existing
@@ -22,3 +23,4 @@ class UploadFile(models.Model):
 
 class Text(models.Model):
     content = models.TextField()
+    active = models.BooleanField(default=True)

@@ -1,7 +1,7 @@
-{% extends 'adminlte/base.html' %}
+{% extends 'webapp/base.html' %}
 {% load bootstrap3 %}
 
-{% block title %}Text Form{% endblock %}
+{% block title %}Formulário de Texto{% endblock %}
 {% block extrastyle %}
 {% endblock %}
 {% block content %}
@@ -9,7 +9,7 @@
   <div class="col-xs-12 col-md-7 left">
     <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Insert a text</h3>
+          <h3 class="box-title">Insira um texto</h3>
         </div>
         <!-- /.box-header -->
         <form action="{% url 'webapp:text_form' %}" role="form" method="POST" class="form">
@@ -18,10 +18,10 @@
               {% bootstrap_form form %}
               {% buttons %}
                 <a class="btn btn-default go_back" href="#" onclick="history.go(-1)">
-                    <i class="fa fa-history"></i> Go back
+                    <i class="fa fa-history"></i> Voltar
                 </a>
                 <button type="submit" class="btn btn-primary" onclick="history.go(-1)">
-                  <i class="fa fa-save"></i> Save
+                  <i class="fa fa-save"></i> Salvar
                 </button>
               {% endbuttons %}
           </div>

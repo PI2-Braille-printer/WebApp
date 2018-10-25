@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import UploadFileForm, DefaultForm
-from .models import UploadFile
+from .models import UploadFile, Text
+from django.shortcuts import get_object_or_404
 import os
 
 def index(request):
@@ -56,10 +57,18 @@ def text_form(request):
     )
 
 def download_file(request):
-    file_path = UploadFile.objects.last().file.path
+    obj = get_object_or_404(UploadFile, active=True)
+    file_path = obj.file.path
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type='application/force-download')
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            obj.active = False
+            obj.save()
             return response
-    raise Http404
+
+def get_text(request):
+    obj = get_object_or_404(Text, active=True)
+    obj.active = False
+    obj.save()
+    return HttpResponse(obj.content)
