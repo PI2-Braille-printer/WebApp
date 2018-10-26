@@ -1,17 +1,18 @@
 {% extends 'webapp/base.html' %}
 {% load bootstrap3 %}
-{% block title %}
-  Formulário Upload de Arquivo
+
+{% block title %}Formulário de Texto{% endblock %}
+{% block extrastyle %}
 {% endblock %}
 {% block content %}
 <div class="row">
   <div class="col-xs-12 col-md-7 left">
     <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Formulário Upload de Arquivo</h3>
+          <h3 class="box-title">Insira um texto</h3>
         </div>
         <!-- /.box-header -->
-        <form action="{% url 'webapp:upload_file_form' %}" role="form" method="POST" class="form" enctype="multipart/form-data">
+        <form action="{% url 'webapp:text_form' %}" role="form" method="POST" class="form">
           <div class="box-body">
               {% csrf_token %}
               {% bootstrap_form form %}
