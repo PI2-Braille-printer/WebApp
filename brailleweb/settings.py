@@ -24,7 +24,7 @@ SECRET_KEY = 'av(aiz7wq3zka=t36y9tvhcpfuoj^b0t1%x3xfs70i@bv2q3)#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -51,7 +51,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'brailleweb.urls'
@@ -136,4 +135,3 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
     )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

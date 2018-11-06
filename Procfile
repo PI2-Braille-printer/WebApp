@@ -1,1 +1,1 @@
-web: gunicorn wsgi:brailleweb --log-file -
+web: gunicorn brailleweb.wsgi --log-file -
