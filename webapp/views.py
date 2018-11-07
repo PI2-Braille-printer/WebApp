@@ -56,9 +56,15 @@ def text_form(request):
         {'form': form}
     )
 
+from django.http import Http404
+
 def download_file(request):
-    obj = get_object_or_404(UploadFile, active=True)
+    try:
+        obj = UploadFile.objects.filter(active=True)[0]
+    except:
+        raise Http404('Nao tem download')
     file_path = obj.file.path
+
     if os.path.exists(file_path):
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type='application/force-download')
@@ -66,9 +72,18 @@ def download_file(request):
             obj.active = False
             obj.save()
             return response
+    else:
+        obj.active = False
+        obj.save()
+        raise Http404(str(file_path)+ ' nao encontrado')
 
 def get_text(request):
     obj = get_object_or_404(Text, active=True)
     obj.active = False
     obj.save()
     return HttpResponse(obj.content)
+
+def text_list(request):
+    objs = Text.objects.filter(active=True)
+    
+    return render(request, 'webapp/text_list.html', {'objs': objs})

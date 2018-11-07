@@ -1,0 +1,61 @@
+{% extends 'webapp/base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}Lista de Textos{% endblock %}
+{% block extrastyle %}
+{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-xs-12 col-md-7 left">
+    <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Listagem de textos</h3>
+        </div>
+        
+        {% for obj in objs %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{obj.id}}">
+                Texto {{obj.id}}
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="{{obj.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Texto {{obj.id}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    {{ obj.content }}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+      <!-- /.box -->
+  </div>
+</div>
+{% endblock %}
+
+{% block extrajs %}
+<!-- bootstrap datepicker -->
+<!-- page script -->
+<script>
+  window.onresize = function(event) {
+    var $iW = $(window).innerWidth();
+    if ($iW < 976){
+       $('.right').insertBefore('.left');
+    }else{
+       $('.right').insertAfter('.left');
+    }
+  }
+</script>
+{% endblock %}
