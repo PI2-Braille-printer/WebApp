@@ -4,6 +4,7 @@ from .forms import UploadFileForm, DefaultForm
 from .models import UploadFile, Text
 from django.shortcuts import get_object_or_404
 import os
+from django.core.files import File
 
 def index(request):
     return render(request, 'webapp/base.html')
@@ -38,7 +39,18 @@ def text_form(request):
         form = DefaultForm(request.POST)
         if form.is_valid():
             try:
-                form.save()
+                obj = form.save()
+                myFile = None
+                with open(str(obj.pk)+'.txt', 'w') as f:
+                    myFile = File(f)
+                    myFile.write(str(obj.content))
+                f = open(str(obj.pk)+'.txt', 'r')
+                myFile = File(f)
+                upload_file = UploadFile(file=myFile, active=True)
+                upload_file.save()
+                myFile.close()
+                f.close()
+                print(upload_file.file.name)
                 success = True
             except Exception as e:
                 success = False
