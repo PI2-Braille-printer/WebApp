@@ -5,6 +5,7 @@ from .models import UploadFile, Text
 from django.shortcuts import get_object_or_404
 import os
 from django.core.files import File
+from django.contrib import messages
 
 def index(request):
     return render(request, 'webapp/base.html')
@@ -20,10 +21,10 @@ def upload_file_form(request):
             except Exception as e:
                 success = False
                 print(e)
-        #if not success:
-            #messages.error(request, _("Failed to save!"))
-        #else:
-            #messages.success(request, _("Entry saved!"))
+        if not success:
+            messages.error(request, "Failed to save!")
+        else:
+            messages.success(request, "Entry saved!")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         form = UploadFileForm()
@@ -55,10 +56,10 @@ def text_form(request):
             except Exception as e:
                 success = False
                 print(e)
-        #if not success:
-            #messages.error(request, _("Failed to save!"))
-        #else:
-            #messages.success(request, _("Entry saved!"))
+        if not success:
+            messages.error(request, "Failed to save!")
+        else:
+            messages.success(request, "Entry saved!")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         form = DefaultForm()
